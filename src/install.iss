@@ -1,23 +1,23 @@
 [Setup]
 AppName=Magic mIRC Script
-AppVerName=Magic mIRC Script 0.7.0.2
+AppVerName=Magic mIRC Script 0.7.0.3
 AppPublisher=Cy6JIuMamop
 AppPublisherURL=http://magic.gamenavigator.ru
 AppSupportURL=http://wiki.gamenavigator.ru/wiki/Magic_Script
-AppUpdatesURL=http://magic.gamenavigator.ru
+AppUpdatesURL=http://magic.gamenavigator.ru/magicscript
 DefaultDirName={pf}\Magic mIRC
 DefaultGroupName=Magic mIRC Script
 AllowNoIcons=yes
 LicenseFile=license.txt
 InfoBeforeFile=Info.txt
-OutputDir=Setup
-OutputBaseFilename=Magic_0.7.0.2
+OutputDir=..\bin
+OutputBaseFilename=Magic_0.7.0.3
 Compression=lzma/normal
 SolidCompression=yes
 VersionInfoCompany=Hellfire corp.
-VersionInfoDescription=Magic mIRC Script 0.7.0.2
-VersionInfoTextVersion=v. 0.7.0.2
-VersionInfoVersion=0.7.0.2
+VersionInfoDescription=Magic mIRC Script 0.7.0.3
+VersionInfoTextVersion=v. 0.7.0.3
+VersionInfoVersion=0.7.0.3
 AllowRootDirectory=no
 AlwaysShowComponentsList=yes
 AppendDefaultDirName=yes
@@ -36,7 +36,8 @@ Name: "custom"; Description: "Выборочная установка"; Flags: iscustom
 [components]
 name: "main"; Description: "Файлы скрипта"; Types: full compact custom; Flags: fixed
 name: "txt"; Description: "Настройки скрипта"; Types: full custom; Flags: disablenouninstallwarning
-name: "help"; Description: "Рускоязычная справка"; Types: full custom; Flags: disablenouninstallwarning
+name: "help_ru"; Description: "Рускоязычная справка"; Types: full custom; Flags: disablenouninstallwarning
+name: "help_en"; Description: "Оригинальная справка"; Types: custom; Flags: disablenouninstallwarning
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
@@ -47,12 +48,15 @@ Filename: "{app}\mirc.exe"; Description: "Запустить программу"; Flags: postinsta
 
 [Files]
 Source: "mirc.exe"; DestDir: "{app}"; Components: main
-Source: "mirc.hlp"; DestDir: "{app}"; Flags: ignoreversion; Components: help
+Source: "help\mirc_ru.hlp"; DestDir: "{app}"; DestName: "help.hlp"; Flags: ignoreversion; Components: help_ru
+Source: "ircintro.chm"; DestDir: "{app}"; Flags: ignoreversion; Components: help_en
 Source: "servers.ini"; DestDir: "{app}"; Flags: ignoreversion; Components: txt
 Source: "Версии.txt"; DestDir: "{app}"; Flags: ignoreversion; Components: main
-Source: "scripts\add-ons.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
-Source: "scripts\help.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
-Source: "scripts\logviewer.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
+Source: "readme.txt"; DestDir: "{app}"; Flags: ignoreversion; Components: main
+Source: "versions.txt"; DestDir: "{app}"; Flags: ignoreversion; Components: main
+;Source: "scripts\add-ons\add-ons.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
+Source: "scripts\help\help.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
+Source: "scripts\logviewer\logviewer.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
 Source: "scripts\popups.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
 Source: "scripts\raws.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
 Source: "scripts\setups.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
@@ -62,7 +66,7 @@ Source: "scripts\vizaliases.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion
 Source: "scripts\ZLagBar.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion onlyifdoesntexist; Components: main
 Source: "scripts\TBWin.dll"; DestDir: "{app}\Scripts"; Flags: ignoreversion onlyifdoesntexist; Components: main
 Source: "scripts\remote.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion onlyifdoesntexist; Components: main
-Source: "scripts\actions.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion onlyifdoesntexist; Components: main; beforeinstall: asktoower('actions');
+;Source: "scripts\actions\actions.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion onlyifdoesntexist; Components: main; beforeinstall: asktoower('actions');
 Source: "strings\*"; DestDir: "{app}\Strings"; Flags: ignoreversion onlyifdoesntexist; Components: txt; beforeinstall: asktoower('strings');
 Source: "Grafix\*"; DestDir: "{app}\Grafix"; Flags: ignoreversion; Components: main
 
