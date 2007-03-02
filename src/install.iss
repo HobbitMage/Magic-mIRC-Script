@@ -1,6 +1,6 @@
 [Setup]
 AppName=Magic mIRC Script
-AppVerName=Magic mIRC Script 0.7.0.3
+AppVerName=Magic mIRC Script 0.7.0.4
 AppPublisher=Cy6JIuMamop
 AppPublisherURL=http://magic.gamenavigator.ru
 AppSupportURL=http://wiki.gamenavigator.ru/wiki/Magic_Script
@@ -11,13 +11,13 @@ AllowNoIcons=yes
 LicenseFile=license.txt
 InfoBeforeFile=Info.txt
 OutputDir=..\bin
-OutputBaseFilename=Magic_0.7.0.3
+OutputBaseFilename=Magic_0.7.0.4
 Compression=lzma/normal
 SolidCompression=yes
 VersionInfoCompany=Hellfire corp.
-VersionInfoDescription=Magic mIRC Script 0.7.0.3
-VersionInfoTextVersion=v. 0.7.0.3
-VersionInfoVersion=0.7.0.3
+VersionInfoDescription=Magic mIRC Script 0.7.0.4
+VersionInfoTextVersion=v. 0.7.0.4
+VersionInfoVersion=0.7.0.4
 AllowRootDirectory=no
 AlwaysShowComponentsList=yes
 AppendDefaultDirName=yes
@@ -54,7 +54,6 @@ Source: "servers.ini"; DestDir: "{app}"; Flags: ignoreversion; Components: txt
 Source: "Версии.txt"; DestDir: "{app}"; Flags: ignoreversion; Components: main
 Source: "readme.txt"; DestDir: "{app}"; Flags: ignoreversion; Components: main
 Source: "versions.txt"; DestDir: "{app}"; Flags: ignoreversion; Components: main
-;Source: "scripts\add-ons\add-ons.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
 Source: "scripts\help\help.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
 Source: "scripts\logviewer\logviewer.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
 Source: "scripts\popups.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
@@ -66,9 +65,14 @@ Source: "scripts\vizaliases.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion
 Source: "scripts\ZLagBar.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion onlyifdoesntexist; Components: main
 Source: "scripts\TBWin.dll"; DestDir: "{app}\Scripts"; Flags: ignoreversion onlyifdoesntexist; Components: main
 Source: "scripts\remote.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion onlyifdoesntexist; Components: main
-;Source: "scripts\actions\actions.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion onlyifdoesntexist; Components: main; beforeinstall: asktoower('actions');
 Source: "strings\*"; DestDir: "{app}\Strings"; Flags: ignoreversion onlyifdoesntexist; Components: txt; beforeinstall: asktoower('strings');
 Source: "Grafix\*"; DestDir: "{app}\Grafix"; Flags: ignoreversion; Components: main
+Source: "H:\Projects\MagicmIRC\trunk\src\license.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "H:\Projects\MagicmIRC\trunk\src\help\mirc_ru.hlp"; DestDir: "{app}"; Flags: ignoreversion
+Source: "H:\Projects\MagicmIRC\trunk\src\help\mirc_orig.chm"; DestDir: "{app}"; Flags: ignoreversion
+Source: "H:\Projects\MagicmIRC\trunk\src\scripts\help\help.versions.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "H:\Projects\MagicmIRC\trunk\src\scripts\logviewer\logviewer.versions.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "H:\Projects\MagicmIRC\trunk\src\sounds\Private.WAV"; DestDir: "{app}"; Flags: ignoreversion
 
 [INI]
 Filename: "{app}\mirc.url"; Section: "InternetShortcut"; Key: "URL"; String: "http://magic.gamenavigator.ru"
@@ -87,6 +91,7 @@ var
   UserSexPage: TInputOptionWizardPage;
   ServerNamePage: TInputOptionWizardPage;
   ServerInfoPage: TInputQueryWizardPage;
+  UserThemePage: TInputOptionWizardPage;
   owertexts,askedower: boolean;
   servName,servAddr,servGroup: string;
 
@@ -101,10 +106,6 @@ case par of
  end;
  if owertexts then deletefile(ExpandConstant(CurrentFileName));
  askedower := true;
- end;
-'actions':begin
-  if FileExists(ExpandConstant(CurrentFileName)) then if MsgBox('Найден файл actions.mrc.'#13#13 + 'Хотите сохранить?',mbConfirmation, MB_YESNO) = IDNO then
-    deletefile(ExpandConstant(CurrentFileName));
  end;
 end;
 end;
@@ -123,6 +124,7 @@ begin
     'Пол пользователя', 'Пожалуйста, укажите пол пользователя и нажмите "Далее".',
     '',
     True, False);
+    
   UserSexPage.add('Мужской');
   UserSexPage.add('Женский');
   UserSexPage.add('Неизвестный');
@@ -131,6 +133,11 @@ begin
   ServerNamePage := CreateInputOptionPage(UserSexPage.ID,
     'Сервер', 'Пожалуйста, выберите сервер и нажмите "Далее".',
     '',
+    True, False);
+
+  UserThemePage := CreateInputOptionPage(ServerNamePage.ID,
+    'Цветовая схема', 'Пожалуйста, выберите цветовую тему по умолчанию и нажмите "Далее".',
+    'Цветовую схему можно настроить в меню, вызываемом по комбинации клавиш Alt+K. Доступны несколько тем и возможна тонкая настройка цвета.',
     True, False);
 
   ServerInfoPage := CreateInputQueryPage(ServerNamePage.ID,
@@ -152,6 +159,10 @@ begin
   UserinfoPage.add('Альтернативный ник - используется автоматически, если основной ник занят.',False);
   UserinfoPage2.add('Почтовый адрес - используется при регистрации ника. Некоторые сети позволяют регистрацию без почтового адреса, тогда используется строчка NOMAIL.',False);
   UserinfoPage2.add('Системный адрес E-mail',False);
+
+  UserThemePage.add('Magic Dark — чёрный фон и малиновый текст.');
+  UserThemePage.add('Magic Gray — тёмно-серый фон и текст цвета морской волны.');
+  UserThemePage.add('Magic White — белый фон и фиолетовый текст.');
 end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;
@@ -178,6 +189,16 @@ case CurPageID of
        servAddr := copy(tempstr,0,tempnum - 1);
        servGroup := copy(tempstr,tempnum + 6,length(tempstr));
      end else servAddr := tempstr;
+   end;
+   case GetIniString('text','theme','',mini) of
+   'Magic Dark': UserThemePage.SelectedValueIndex := 0;
+   'Magic Gray': UserThemePage.SelectedValueIndex := 1;
+   'Magic White': UserThemePage.SelectedValueIndex := 2;
+   '': UserThemePage.SelectedValueIndex := 0;
+   else begin
+      UserThemePage.Add('Пользовательская (без изменений)');
+      UserThemePage.SelectedValueIndex := 3;
+   end;
    end;
  end;
  if FileExists(msetup) then begin
@@ -270,6 +291,7 @@ case CurPageID of
        end;
     end;
   end;
+
 end;
 if res then result := true else result := false;
 end;
