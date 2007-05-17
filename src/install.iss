@@ -149,11 +149,11 @@ begin
 
   ServerNamePage.add('Пользовательский');
   ServerNamePage.add('Сервер Навигатора Игрового Мира');
-  ServerNamePage.add('Сервер провайдера Centel (Wenet)');
+  ServerNamePage.add('Сервер провайдера Qwerty (Wenet)');
   ServerNamePage.add('Сервер Северное Бутово (IrcNet.ru)');
   ServerNamePage.add('Сервер ChatNet (DALNet.ru)');
   ServerNamePage.add('Сервер RusNet (RusNet)');
-  ServerNamePage.add('Сервер проекта Media Solipse');
+  //ServerNamePage.add('Сервер проекта Media Solipse');
   
   UserinfoPage.add('Основной ник',False);
   UserinfoPage.add('Альтернативный ник - используется автоматически, если основной ник занят.',False);
@@ -265,7 +265,7 @@ case CurPageID of
          ServerInfoPage.Values[2] := '';
        end;
     2: begin
-         ServerInfoPage.Values[0] := 'Провайдер Centel';
+         ServerInfoPage.Values[0] := 'Провайдер Qwerty';
          ServerInfoPage.Values[1] := 'irc.qwerty.ru:6667';
          ServerInfoPage.Values[2] := 'WeNet.ru';
        end;
@@ -338,10 +338,10 @@ msetup := ExpandConstant('{app}\Strings\setup.ini');
    setinistring('options','n2','0,0,0,1,0,1,1,1,0,60,120,0,0,1,0,0,1,1,1,120,20,10,0,0,1,1,1,1,0,0,1,1,0,0,1,0',mini);
    setinistring('options','n3','30000,1,0,1,1,0,0,1,0,0,0,1,0,1,1,1,1,1,0,0,0,0,1,1,0,1,0,15,0,0,0,3,180,0,1,0,0',mini);
    setinistring('options','n4','1,0,1,2,0,0,9999,0,0,1,1,1,1024,0,1,99,60,0,1,0,0,1,1,1,1,5000,1,5,0,1,13,0,1,1,0,1,1',mini);
-   setinistring('options','n5','1,1,1,1,1,1,1,1,1,1,0,0,1,2,0,1,1,0,300,10,4,0,1,29,0,0,1,8192,1,0,1,85,0,1,0,0',mini);
+   setinistring('options','n5','1,1,1,1,1,1,1,1,1,1,0,0,1,2,0,1,1,0,300,10,4,0,1,29,0,0,1,8192,1,0,0,85,0,1,0,0',mini);
    setinistring('options','n6','0,1,8,1,1,1,1,1,1,1,0,0,0,0,1,1,0,1,0,1,0,0,500,1,1,0,1,0,0,1,4,1,1,1,0,0',mini);
    setinistring('options','n7','1,0,0,0,0,1,0,1,1,1,1,0,0,1,0,0,1,70,0,60,0,1,1,1,1,1,0,0,1,0,1,0,1,1,1,0,1',mini);
-   setinistring('options','n8','2,3,0,212,1,1,1,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0',mini);
+   setinistring('options','n8','2,3,0,212,1,1,1,2,0,0,1,0,0,0,0,0,1,0,0,0,0,0',mini);
 
    setinistring('fonts','fstatus','Verdana,411,204,0',mini);
    setinistring('fonts','fchannel','Verdana,411,204,1',mini);
