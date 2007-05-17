@@ -1,5 +1,0 @@
-butovo.ircnet.ru j #butovo,#centel
-media.solipse.ru j #solipse_media
-gamenavigator j #navigator-central
-Ircnet.ru j #sohay
-Wenet j #qwerty

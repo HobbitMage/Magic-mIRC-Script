@@ -1,6 +1,6 @@
 [Setup]
 AppName=Magic mIRC Script
-AppVerName=Magic mIRC Script 0.7.0.4
+AppVerName=Magic mIRC Script 0.7.0.5
 AppPublisher=Cy6JIuMamop
 AppPublisherURL=http://magic.gamenavigator.ru
 AppSupportURL=http://wiki.gamenavigator.ru/wiki/Magic_Script
@@ -11,13 +11,13 @@ AllowNoIcons=yes
 LicenseFile=license.txt
 InfoBeforeFile=Info.txt
 OutputDir=..\bin
-OutputBaseFilename=Magic_0.7.0.4
+OutputBaseFilename=Magic_0.7.0.5
 Compression=lzma/normal
 SolidCompression=yes
 VersionInfoCompany=Hellfire corp.
-VersionInfoDescription=Magic mIRC Script 0.7.0.4
-VersionInfoTextVersion=v. 0.7.0.4
-VersionInfoVersion=0.7.0.4
+VersionInfoDescription=Magic mIRC Script 0.7.0.5
+VersionInfoTextVersion=v. 0.7.0.5
+VersionInfoVersion=0.7.0.5
 AllowRootDirectory=no
 AlwaysShowComponentsList=yes
 AppendDefaultDirName=yes
@@ -48,31 +48,31 @@ Filename: "{app}\mirc.exe"; Description: "Запустить программу"; Flags: postinsta
 
 [Files]
 Source: "mirc.exe"; DestDir: "{app}"; Components: main
-Source: "help\mirc_ru.hlp"; DestDir: "{app}"; DestName: "help.hlp"; Flags: ignoreversion; Components: help_ru
+Source: "help\mirc.hlp"; DestDir: "{app}"; Flags: ignoreversion; Components: help_ru
+Source: "help\mirc.chm"; DestDir: "{app}"; Flags: ignoreversion; Components: help_en
 Source: "ircintro.chm"; DestDir: "{app}"; Flags: ignoreversion; Components: help_en
 Source: "servers.ini"; DestDir: "{app}"; Flags: ignoreversion; Components: txt
 Source: "Версии.txt"; DestDir: "{app}"; Flags: ignoreversion; Components: main
 Source: "readme.txt"; DestDir: "{app}"; Flags: ignoreversion; Components: main
 Source: "versions.txt"; DestDir: "{app}"; Flags: ignoreversion; Components: main
-Source: "scripts\help\help.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
-Source: "scripts\logviewer\logviewer.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
-Source: "scripts\popups.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
-Source: "scripts\raws.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
-Source: "scripts\setups.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
-Source: "scripts\stuffaliases.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
-Source: "scripts\sysaliases.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
-Source: "scripts\vizaliases.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
+Source: "scripts\help\help.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
+Source: "scripts\logviewer\logviewer.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
+Source: "scripts\popups.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
+Source: "scripts\popup.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
+Source: "scripts\raws.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
+Source: "scripts\setups.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
+Source: "scripts\stuffaliases.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
+Source: "scripts\sysaliases.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
+Source: "scripts\vizaliases.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion; Components: main
 Source: "scripts\ZLagBar.mrc"; DestDir: "{app}\Scripts"; Flags: ignoreversion onlyifdoesntexist; Components: main
 Source: "scripts\TBWin.dll"; DestDir: "{app}\Scripts"; Flags: ignoreversion onlyifdoesntexist; Components: main
 Source: "scripts\remote.ini"; DestDir: "{app}\Scripts"; Flags: ignoreversion onlyifdoesntexist; Components: main
 Source: "strings\*"; DestDir: "{app}\Strings"; Flags: ignoreversion onlyifdoesntexist; Components: txt; beforeinstall: asktoower('strings');
 Source: "Grafix\*"; DestDir: "{app}\Grafix"; Flags: ignoreversion; Components: main
-Source: "H:\Projects\MagicmIRC\trunk\src\license.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "H:\Projects\MagicmIRC\trunk\src\help\mirc_ru.hlp"; DestDir: "{app}"; Flags: ignoreversion
-Source: "H:\Projects\MagicmIRC\trunk\src\help\mirc_orig.chm"; DestDir: "{app}"; Flags: ignoreversion
-Source: "H:\Projects\MagicmIRC\trunk\src\scripts\help\help.versions.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "H:\Projects\MagicmIRC\trunk\src\scripts\logviewer\logviewer.versions.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "H:\Projects\MagicmIRC\trunk\src\sounds\Private.WAV"; DestDir: "{app}"; Flags: ignoreversion
+Source: "license.txt"; DestDir: "{app}"; Flags: ignoreversion; Components: main
+Source: "scripts\help\help.versions.txt"; DestDir: "{app}\Strings"; Flags: ignoreversion; Components: main
+Source: "scripts\logviewer\logviewer.versions.txt"; DestDir: "{app}\Strings"; Flags: ignoreversion; Components: main
+;Source: "sounds\Private.mp3"; DestDir: "{app}"; Flags: ignoreversion
 
 [INI]
 Filename: "{app}\mirc.url"; Section: "InternetShortcut"; Key: "URL"; String: "http://magic.gamenavigator.ru"
@@ -162,7 +162,7 @@ begin
 
   UserThemePage.add('Magic Dark — чёрный фон и малиновый текст.');
   UserThemePage.add('Magic Gray — тёмно-серый фон и текст цвета морской волны.');
-  UserThemePage.add('Magic White — белый фон и фиолетовый текст.');
+  UserThemePage.add('Magic Light — белый фон и фиолетовый текст.');
 end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;
@@ -193,7 +193,7 @@ case CurPageID of
    case GetIniString('text','theme','',mini) of
    'Magic Dark': UserThemePage.SelectedValueIndex := 0;
    'Magic Gray': UserThemePage.SelectedValueIndex := 1;
-   'Magic White': UserThemePage.SelectedValueIndex := 2;
+   'Magic Light': UserThemePage.SelectedValueIndex := 2;
    '': UserThemePage.SelectedValueIndex := 0;
    else begin
       UserThemePage.Add('Пользовательская (без изменений)');
@@ -325,47 +325,48 @@ msetup := ExpandConstant('{app}\Strings\setup.ini');
    deleteinisection('colors',mini)
    deleteinisection('palettes',mini)
  end;
- setinistring('text','aptitle','Магический чат, версия 0.7.0.2',mini);
+ setinistring('text','aptitle','Магический чат, версия 0.7.0.5',mini);
  if overwrite then begin
    setinistring('text','quit','$quit.msg',mini);
    setinistring('text','finger','$ctcp.finger.ans',mini);
-   setinistring('text','theme','Magic Dark',mini);
+   if UserThemePage.SelectedValueIndex = 0 then setinistring('text','theme','Magic Dark',mini);
+   if UserThemePage.SelectedValueIndex = 1 then setinistring('text','theme','Magic Gray',mini);
+   if UserThemePage.SelectedValueIndex = 2 then setinistring('text','theme','Magic Light',mini);
 
-   setinistring('options','n0','1,1,0,1,1,1,300,0,0,1,1,2,0,0,0,0,1,0,1,0,4096,0,1,4,0,0,1,1,0,50,1,1,0,0,0',mini);
-   setinistring('options','n1','5,100,1,1,2093,19,33,0,8,1,0,1,1,1,1,0,1,1,0,0,0,1,1,1,5,1,0,0,0,0,1,0,1,0,1,10',mini);
-   setinistring('options','n2','0,0,0,1,1,1,1,1,0,60,120,0,0,1,0,0,1,1,1,120,20,10,0,0,1,1,1,1,0,0,1,1,0,0,1,0',mini);
-   setinistring('options','n3','30000,1,0,1,1,0,0,1,0,1,0,1,0,1,1,1,1,1,0,0,0,0,1,1,0,1,0,27,0,0,1,3,180,0,1,0,0',mini);
-   setinistring('options','n4','1,0,1,0,0,0,9999,0,0,1,1,1,1024,0,0,99,60,0,1,0,0,1,1,4,1,5000,1,5,0,1,13,0,1,1,0,1,1',mini);
-   setinistring('options','n5','1,1,1,1,1,1,1,1,1,1,0,0,1,2,0,1,1,0,300,10,4,0,1,29,0,0,1,8192,1,0,0,85,0,1,0,0',mini);
-   setinistring('options','n6','0,1,11,1,1,1,1,1,1,1,0,0,0,0,1,1,0,0,0,1,0,0,500,1,1,0,0,2,0,1,4,1,0,1,0,0',mini);
-   setinistring('options','n7','1,0,0,0,0,1,0,1,1,1,1,0,0,1,0,0,1,70,0,3,0,1,1,1,1,1,0,0,1,0,1,0,1,1,1,0,1',mini);
-   setinistring('options','n8','1,2,0,168,1,1,1,2,0,0,1,0',mini);
+   setinistring('options','n0','1,1,0,1,1,1,300,0,0,1,1,2,0,0,0,0,1,0,1,0,2048,0,1,4,0,0,1,1,0,50,1,1,0,0,0',mini);
+   setinistring('options','n1','5,100,1,1,2300,18,27,0,4,1,0,1,1,1,1,0,1,1,0,0,0,1,1,1,5,1,1,0,0,0,1,0,1,0,1,10',mini);
+   setinistring('options','n2','0,0,0,1,0,1,1,1,0,60,120,0,0,1,0,0,1,1,1,120,20,10,0,0,1,1,1,1,0,0,1,1,0,0,1,0',mini);
+   setinistring('options','n3','30000,1,0,1,1,0,0,1,0,0,0,1,0,1,1,1,1,1,0,0,0,0,1,1,0,1,0,15,0,0,0,3,180,0,1,0,0',mini);
+   setinistring('options','n4','1,0,1,2,0,0,9999,0,0,1,1,1,1024,0,1,99,60,0,1,0,0,1,1,1,1,5000,1,5,0,1,13,0,1,1,0,1,1',mini);
+   setinistring('options','n5','1,1,1,1,1,1,1,1,1,1,0,0,1,2,0,1,1,0,300,10,4,0,1,29,0,0,1,8192,1,0,1,85,0,1,0,0',mini);
+   setinistring('options','n6','0,1,8,1,1,1,1,1,1,1,0,0,0,0,1,1,0,1,0,1,0,0,500,1,1,0,1,0,0,1,4,1,1,1,0,0',mini);
+   setinistring('options','n7','1,0,0,0,0,1,0,1,1,1,1,0,0,1,0,0,1,70,0,60,0,1,1,1,1,1,0,0,1,0,1,0,1,1,1,0,1',mini);
+   setinistring('options','n8','2,3,0,212,1,1,1,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0',mini);
+
    setinistring('fonts','fstatus','Verdana,411,204,0',mini);
-   setinistring('fonts','fchannel','Verdana,411,204,0',mini);
+   setinistring('fonts','fchannel','Verdana,411,204,1',mini);
    setinistring('fonts','fquery','Verdana,411,204,0',mini);
 
  end;
- setinistring('pfiles','n0','scripts\popups.ini',mini);
- setinistring('pfiles','n1','scripts\popups.ini',mini);
- setinistring('pfiles','n2','scripts\popups.ini',mini);
- setinistring('pfiles','n3','scripts\popups.ini',mini);
- setinistring('pfiles','n4','scripts\popups.ini',mini);
+ setinistring('pfiles','n0','scripts\remote.ini',mini);
+ setinistring('pfiles','n1','scripts\remote.ini',mini);
+ setinistring('pfiles','n2','scripts\remote.ini',mini);
+ setinistring('pfiles','n3','scripts\remote.ini',mini);
+ setinistring('pfiles','n4','Scripts\popup.mrc',mini);
 
  deleteinisection('rfiles',mini)
  setinistring('rfiles','n0','scripts\remote.ini',mini);
  setinistring('rfiles','n1','scripts\remote.ini',mini);
- setinistring('rfiles','n2','scripts\actions.mrc',mini);
- setinistring('rfiles','n3','scripts\raws.ini',mini);
- setinistring('rfiles','n4','scripts\popups.ini',mini);
- setinistring('rfiles','n5','scripts\setups.ini',mini);
- setinistring('rfiles','n6','scripts\add-ons.ini',mini);
- setinistring('rfiles','n7','scripts\logviewer.ini',mini);
- setinistring('rfiles','n8','scripts\help.ini',mini);
+ setinistring('rfiles','n2','Scripts\raws.mrc',mini);
+ setinistring('rfiles','n3','Scripts\popups.mrc',mini);
+ setinistring('rfiles','n4','Scripts\setups.mrc',mini);
+ setinistring('rfiles','n5','Scripts\help.mrc',mini);
+ setinistring('rfiles','n6','Scripts\logviewer.mrc',mini);
 
  deleteinisection('afiles',mini)
- setinistring('afiles','n0','scripts\vizaliases.ini',mini);
- setinistring('afiles','n1','scripts\stuffaliases.ini',mini);
- setinistring('afiles','n2','scripts\sysaliases.ini',mini);
+ setinistring('afiles','n0','scripts\vizaliases.mrc',mini);
+ setinistring('afiles','n1','scripts\stuffaliases.mrc',mini);
+ setinistring('afiles','n2','scripts\sysaliases.mrc',mini);
 
  setinistring('clicks','status','click.status $1',mini);
  setinistring('clicks','query','click.query $1',mini);
@@ -384,7 +385,7 @@ msetup := ExpandConstant('{app}\Strings\setup.ini');
 
  setinistring('colors','n0','Magic Dark,0,8,9,4,1,1,12,11,7,3,11,13,9,7,6,14,7,8,3,5,1,0,1,0,13,15,6,14',mini);
  setinistring('colors','n1','Magic Gray,15,10,5,4,0,1,12,12,7,3,12,11,9,5,11,1,7,8,3,5,2,15,0,15,0,1,5,15',mini);
- setinistring('colors','n2','Magic White,15,8,4,7,2,3,4,2,3,0,2,6,5,2,6,14,1,14,12,5,12,15,1,15,1,14,5,0',mini);
+ setinistring('colors','n2','Magic Light,15,8,4,7,2,3,4,2,3,0,2,6,5,2,6,14,1,14,12,5,12,15,1,15,1,14,5,0',mini);
  if overwrite then begin
    setinistring('colors','n3','mIRC Classic,0,6,4,5,2,3,3,3,3,3,3,1,5,7,6,1,3,2,3,5,1,0,1,0,1,15,6,0',mini);
    setinistring('colors','n4','mIRC Modern,0,6,4,7,2,3,4,3,3,3,3,1,5,2,6,1,14,2,3,5,1,0,1,0,1,14,5,0',mini);
@@ -418,8 +419,18 @@ msetup := ExpandConstant('{app}\Strings\setup.ini');
    setinistring('cnicks','n5',',7,%,,0,0,0,0,0',mini);
    setinistring('cnicks','n6',',14,+,,0,0,0,0,0',mini);
  end;
- 
-  if FileExists(muser) then FileCopy(muser,ExpandConstant('{app}\strings\user.ini.bak'),False);
+
+ if overwrite then deleteinisection('chanfolder',mini);
+ setinistring('chanfolder','n0','#navigator-central,"Центральный канал чата «Навигатора»",,"gamenavigator",1,,"Навигатор"',mini);
+ setinistring('chanfolder','n1','#quiz,"Викторина в чатах «Навигатора»",,"gamenavigator",1,,"Навигатор"',mini);
+ setinistring('chanfolder','n2','#butovo,"Канал Бутово",,"IrcNet.ru",1,,"Butovo"',mini);
+ setinistring('chanfolder','n3','#butovo_point,"Канал бутовских поинтовщиков",,"IrcNet.ru",1,,"Butovo"',mini);
+ setinistring('chanfolder','n4','#centel,"Бутовский канал сети Qwerty",,"IrcNet.ru",1,,"Butovo"',mini);
+ setinistring('chanfolder','n5','#qwerty,"Центральный канал Qwerty",,"WeNet",1,,"Qwerty"',mini);
+ setinistring('chanfolder','n6','#yellow,"Игровой канал сети Qwerty",,"WeNet",,,"Qwerty"',mini);
+ setinistring('chanfolder','n7','#hellfire,,,,1,,"Hellfire"',mini);
+
+//  if FileExists(muser) then FileCopy(muser,ExpandConstant('{app}\strings\user.ini.bak'),False);
   setinistring('user','nick',UserinfoPage.Values[0],msetup);
   setinistring('user','anick',UserinfoPage.Values[1],msetup);
   setinistring('user','pass.email',UserinfoPage2.Values[0],msetup);
@@ -438,8 +449,8 @@ msetup := ExpandConstant('{app}\Strings\setup.ini');
   setinistring('str','finger.ans',GetIniString('str','finger.ans','Пальцем не тыкать!',msetup),msetup);
   setinistring('str','quit.mes',GetIniString('str','quit.mes','$iif($network == gamenavigator,http://magic.gamenavigator.ru,Magic Script %str.version от %str.vdate $+ )',msetup),msetup);
                          {Версия}
-  setinistring('str','version','0.7.0.2',msetup);
-  setinistring('str','vdate','14.09.06',msetup);
+  setinistring('str','version','0.7.0.5',msetup);
+  setinistring('str','vdate','15.05.07',msetup);
   setinistring('str','away.msg',GetIniString('str','away.msg','10уш $+ $sex(ел,ла,ло,ли) $+ 3. Причина:10 $1-',msetup),msetup);
   setinistring('str','away.return',GetIniString('str','away.return','10вернул $+ $sex(ся,ась,ось,ись) $+ . 3Уходил $+ $sex(,а,о,и) $+ 10 $duration($awaytime,3) 3назад по причине:10 $awaymsg',msetup),msetup);
   setinistring('str','away.repeat',GetIniString('str','away.repeat','10не здесь. 3Уш $+ $sex(ел,ла,ло,ли) $+ 10 $duration($awaytime,3) 3назад по причине:10 $awaymsg',msetup),msetup);
