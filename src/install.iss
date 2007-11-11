@@ -1,6 +1,6 @@
 [Setup]
 AppName=Magic mIRC Script
-AppVerName=Magic mIRC Script 0.7.0.5
+AppVerName=Magic mIRC Script 0.7.0.6
 AppPublisher=Cy6JIuMamop
 AppPublisherURL=http://magic.gamenavigator.ru
 AppSupportURL=http://wiki.gamenavigator.ru/wiki/Magic_Script
@@ -11,13 +11,13 @@ AllowNoIcons=yes
 LicenseFile=license.txt
 InfoBeforeFile=Info.txt
 OutputDir=..\bin
-OutputBaseFilename=Magic_0.7.0.5
+OutputBaseFilename=Magic_0.7.0.6
 Compression=lzma/normal
 SolidCompression=yes
 VersionInfoCompany=Hellfire corp.
-VersionInfoDescription=Magic mIRC Script 0.7.0.5
-VersionInfoTextVersion=v. 0.7.0.5
-VersionInfoVersion=0.7.0.5
+VersionInfoDescription=Magic mIRC Script 0.7.0.6
+VersionInfoTextVersion=v. 0.7.0.6
+VersionInfoVersion=0.7.0.6
 AllowRootDirectory=no
 AlwaysShowComponentsList=yes
 AppendDefaultDirName=yes
@@ -178,6 +178,7 @@ case CurPageID of
   mini := ExpandConstant('{app}\mirc.ini');
   muser := ExpandConstant('{app}\Strings\user.ini');
   msetup := ExpandConstant('{app}\Strings\setup.ini');
+  UserThemePage.SelectedValueIndex := 0;
  if FileExists(mini) then begin
    tempstr := GetIniString('mirc','host','',mini);
    tempnum := pos('SERVER:',tempstr);
@@ -325,27 +326,37 @@ msetup := ExpandConstant('{app}\Strings\setup.ini');
    deleteinisection('colors',mini)
    deleteinisection('palettes',mini)
  end;
- setinistring('text','aptitle','Магический чат, версия 0.7.0.5',mini);
+ setinistring('text','aptitle','Магический чат, версия 0.7.0.6',mini);
  if overwrite then begin
    setinistring('text','quit','$quit.msg',mini);
    setinistring('text','finger','$ctcp.finger.ans',mini);
    if UserThemePage.SelectedValueIndex = 0 then setinistring('text','theme','Magic Dark',mini);
    if UserThemePage.SelectedValueIndex = 1 then setinistring('text','theme','Magic Gray',mini);
    if UserThemePage.SelectedValueIndex = 2 then setinistring('text','theme','Magic Light',mini);
+   setinistring('text','defport','6667',mini);
+   setinistring('text','commandchar','/',mini);
+   setinistring('text','linesep','-',mini);
+   setinistring('text','timestamp','[HH:nn:ss]',mini);
+   setinistring('text','logstamp','[HH:nn:ss]',mini);
+   setinistring('text','accept','*.jpg,*.gif,*.png,*.bmp,*.txt,*.log,*.wav,*.mid,*.mp3,*.wma,*.ogg,*.zip',mini);
+   setinistring('text','ignore','*.exe,*.com,*.bat,*.dll,*.ini,*.mrc,*.vbs,*.js,*.pif,*.scr,*.lnk,*.pl,*.shs,*.htm,*.html,*.wmf',mini);
 
-   setinistring('options','n0','1,1,0,1,1,1,300,0,0,1,1,2,0,0,0,0,1,0,1,0,2048,0,1,4,0,0,1,1,0,50,1,1,0,0,0',mini);
-   setinistring('options','n1','5,100,1,1,2300,18,27,0,4,1,0,1,1,1,1,0,1,1,0,0,0,1,1,1,5,1,1,0,0,0,1,0,1,0,1,10',mini);
-   setinistring('options','n2','0,0,0,1,0,1,1,1,0,60,120,0,0,1,0,0,1,1,1,120,20,10,0,0,1,1,1,1,0,0,1,1,0,0,1,0',mini);
-   setinistring('options','n3','30000,1,0,1,1,0,0,1,0,0,0,1,0,1,1,1,1,1,0,0,0,0,1,1,0,1,0,15,0,0,0,3,180,0,1,0,0',mini);
-   setinistring('options','n4','1,0,1,2,0,0,9999,0,0,1,1,1,1024,0,1,99,60,0,1,0,0,1,1,1,1,5000,1,5,0,1,13,0,1,1,0,1,1',mini);
-   setinistring('options','n5','1,1,1,1,1,1,1,1,1,1,0,0,1,2,0,1,1,0,300,10,4,0,1,29,0,0,1,8192,1,0,0,85,0,1,0,0',mini);
-   setinistring('options','n6','0,1,8,1,1,1,1,1,1,1,0,0,0,0,1,1,0,1,0,1,0,0,500,1,1,0,1,0,0,1,4,1,1,1,0,0',mini);
-   setinistring('options','n7','1,0,0,0,0,1,0,1,1,1,1,0,0,1,0,0,1,70,0,60,0,1,1,1,1,1,0,0,1,0,1,0,1,1,1,0,1',mini);
-   setinistring('options','n8','2,3,0,212,1,1,1,2,0,0,1,0,0,0,0,0,1,0,0,0,0,0',mini);
+   setinistring('options','n0','1,1,0,1,1,1,300,0,0,1,1,1,0,0,0,0,1,0,1,0,2048,0,1,4,0,0,1,1,0,50,1,1,0,0,0',mini);
+   setinistring('options','n1','5,100,1,1,4490,2,23,0,7,1,0,1,1,1,1,0,1,1,0,0,0,1,1,1,5,1,1,0,0,0,1,0,1,0,1,10',mini);
+setinistring('options','n2','0,0,0,1,0,1,1,1,0,60,120,0,0,1,0,0,0,1,0,120,20,10,0,0,0,1,1,1,0,0,1,1,0,0,1,1',mini);
+setinistring('options','n3','30000,1,0,1,1,0,0,1,0,0,0,1,0,1,1,1,1,1,0,0,0,0,1,1,0,1,0,8,0,0,0,3,180,0,1,0,0',mini);
+setinistring('options','n4','1,0,1,2,0,0,9999,0,0,1,1,1,1024,0,1,99,60,0,1,0,0,1,1,3,0,5000,1,5,0,1,13,0,1,1,0,1,1',mini);
+setinistring('options','n5','1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,1,1,0,300,10,4,0,1,29,0,0,1,8192,1,0,0,85,0,1,0,0',mini);
+setinistring('options','n6','0,1,0,1,1,1,1,1,1,1,0,0,0,0,1,1,0,1,0,1,0,0,500,1,1,0,1,0,0,1,4,1,1,1,0,0',mini);
+setinistring('options','n7','1,0,0,0,0,1,0,1,1,1,1,0,0,1,0,0,1,70,0,60,0,1,1,1,1,1,0,0,1,0,1,0,1,1,1,0,1',mini);
+setinistring('options','n8','2,3,0,212,1,1,0,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0,168,1,0',mini);
 
-   setinistring('fonts','fstatus','Verdana,411,204,0',mini);
-   setinistring('fonts','fchannel','Verdana,411,204,1',mini);
-   setinistring('fonts','fquery','Verdana,411,204,0',mini);
+   setinistring('fonts','fstatus','Verdana,411,204,2',mini);
+   setinistring('fonts','fchannel','Verdana,411,204,2',mini);
+   setinistring('fonts','fquery','Verdana,411,204,2',mini);
+   setinistring('fonts','f#navigator-central','Verdana,411,204,2',mini);
+   setinistring('fonts','f#quiz','Verdana,411,204,2',mini);
+   setinistring('fonts','f#hellfire','Verdana,411,204,2',mini);
 
  end;
  setinistring('pfiles','n0','scripts\remote.ini',mini);
@@ -430,6 +441,22 @@ msetup := ExpandConstant('{app}\Strings\setup.ini');
  setinistring('chanfolder','n6','#yellow,"Игровой канал сети Qwerty",,"WeNet",,,"Qwerty"',mini);
  setinistring('chanfolder','n7','#hellfire,,,,1,,"Hellfire"',mini);
 
+ setinistring('dirs','logdir','logs\',mini);
+setinistring('dirs','waves','sounds\',mini);
+setinistring('dirs','midis','sounds\',mini);
+setinistring('dirs','mp3s','sounds\',mini);
+setinistring('dirs','wmas','sounds\',mini);
+setinistring('dirs','oggs','sounds\',mini);
+
+setinistring('about','version','6.31',mini);
+setinistring('about','show','no',mini);
+
+setinistring('language','sjis','0',mini);
+setinistring('language','multibyte','1',mini);
+setinistring('language','mbed','0',mini);
+setinistring('language','utf','1',mini);
+setinistring('language','linking','1',mini);
+
 //  if FileExists(muser) then FileCopy(muser,ExpandConstant('{app}\strings\user.ini.bak'),False);
   setinistring('user','nick',UserinfoPage.Values[0],msetup);
   setinistring('user','anick',UserinfoPage.Values[1],msetup);
@@ -449,13 +476,13 @@ msetup := ExpandConstant('{app}\Strings\setup.ini');
   setinistring('str','finger.ans',GetIniString('str','finger.ans','Пальцем не тыкать!',msetup),msetup);
   setinistring('str','quit.mes',GetIniString('str','quit.mes','$iif($network == gamenavigator,http://magic.gamenavigator.ru,Magic Script %str.version от %str.vdate $+ )',msetup),msetup);
                          {Версия}
-  setinistring('str','version','0.7.0.5',msetup);
-  setinistring('str','vdate','15.05.07',msetup);
-  setinistring('str','away.msg',GetIniString('str','away.msg','10уш $+ $sex(ел,ла,ло,ли) $+ 3. Причина:10 $1-',msetup),msetup);
-  setinistring('str','away.return',GetIniString('str','away.return','10вернул $+ $sex(ся,ась,ось,ись) $+ . 3Уходил $+ $sex(,а,о,и) $+ 10 $duration($awaytime,3) 3назад по причине:10 $awaymsg',msetup),msetup);
-  setinistring('str','away.repeat',GetIniString('str','away.repeat','10не здесь. 3Уш $+ $sex(ел,ла,ло,ли) $+ 10 $duration($awaytime,3) 3назад по причине:10 $awaymsg',msetup),msetup);
-  setinistring('str','away.change',GetIniString('str','away.change','10уходил $+ $sex(,а,о,и) $duration($awaytime,3) 3назад по причине:10 $awaymsg $+ 3. Теперь уш $+ $sex(ел,ла,ло,ли) по причине:10 $1-',msetup),msetup);
-  setinistring('str','away.nochange',GetIniString('str','away.nochange','10Причина ухода совпадает с текущей',msetup),msetup);
+  setinistring('str','version','0.7.0.6',msetup);
+  setinistring('str','vdate','10.11.07',msetup);
+  setinistring('str','away.msg',GetIniString('str','away.msg','10уш $+ $sex(ел,ла,ло,ли) 3Причина:10 $1-',msetup),msetup);
+  setinistring('str','away.return',GetIniString('str','away.return','10вернул $+ $sex(ся,ась,ось,ись) 3Уходил $+ $sex(,а,о,и) $+ 10 $duration($awaytime,3) 3назад по причине:10 $awaymsg',msetup),msetup);
+  setinistring('str','away.repeat',GetIniString('str','away.repeat','10не здесь, 3уш $+ $sex(ел,ла,ло,ли) $+ 10 $duration($awaytime,3) 3назад по причине:10 $awaymsg',msetup),msetup);
+  setinistring('str','away.change',GetIniString('str','away.change','10уходил $+ $sex(,а,о,и) $duration($awaytime,3) 3назад по причине:10 $awaymsg 3Теперь уш $+ $sex(ел,ла,ло,ли) по причине:10 $1-',msetup),msetup);
+  setinistring('str','away.nochange',GetIniString('str','away.nochange','10Причина ухода совпадает с текущей',msetup),msetup);
   setinistring('str','away.nick',GetIniString('str','away.nick',UserinfoPage.Values[0],msetup),msetup);
   setinistring('str','away.end',GetIniString('str','away.end','_afk',msetup),msetup);
   setinistring('str','away.pre',GetIniString('str','away.pre','[AFK]',msetup),msetup);

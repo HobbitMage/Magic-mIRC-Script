@@ -465,31 +465,39 @@ on *:dialog:Pscript:*:*:{
 
 dialog prefs_mserver {
   title "Многосерверность"
-  size $iif($calc($dialog(PMenu).x + $dialog(PMenu).w),$ifmatch,20) $iif($dialog(PMenu).y,$ifmatch,65) 250 54
+  size $iif($calc($dialog(PMenu).x + $dialog(PMenu).w),$ifmatch,20) $iif($dialog(PMenu).y,$ifmatch,65) 175 101
   option dbu
   icon grafix\prefs_mserver.ico, 0
-  button "Применить", 1, 62 41 48 12, disable
-  button "Справка", 2, 110 41 48 12
-  button "Закрыть", 3, 158 41 48 12, ok
+  button "Применить", 1, 16 83 48 12, disable
+  button "Справка", 2, 64 83 48 12
+  button "Закрыть", 3, 112 83 48 12, ok
   check "Автосоединение с серверами по списку:", 4, 1 1 148 10
-  edit "", 5, 1 11 247 10
-  button "Добавить текущий", 6, 2 41 55 12
-  box "Команды меню, работающие для всех серверов", 7, 4 22 244 17
-  check "Смена ника", 8, 7 28 47 10
-  check "Режим ухода", 9, 57 28 50 10
-  check "Выход из сети", 10, 111 28 50 10
+  button "Текущий", 6, 116 24 55 12, disable hide
+  box "Команды меню, работающие для всех серверов", 7, 2 64 169 17
+  check "Смена ника", 8, 5 70 47 10
+  check "Режим ухода", 9, 55 70 50 10
+  check "Выход из сети", 10, 109 70 50 10
+  combo 5, 2 11 111 50, size
+  button "Добавить", 11, 116 11 55 12, hide
+  button "Удалить", 12, 116 11 55 12, hide
+  button "Редактировать", 13, 116 11 55 12, disable
 }
 
 on *:dialog:Pmserver:*:*:{
   if ($devent == init) {
     if (%prefs.multiserver) did -c pmserver 4
-    did -a pmserver 5 %prefs.servers
+    %prefs.servers.temp = $sorttok(%prefs.servers,32)
+    didtok pmserver 5 32 %prefs.servers.temp
     if (%prefs.mserver.nick) did -c pmserver 8
     if (%prefs.mserver.away) did -c pmserver 9
     if (%prefs.mserver.quit) did -c pmserver 10
+    if (!$istok(%prefs.servers.temp,$server,32)) did -e $dname 6
+    return
   }
   if ($devent == edit) {
-    did -e Pmserver 1
+    if (!$did(5)) { did -v $dname 13 | did -h $dname 11 | did -h $dname 12 | return }
+    if (!$istok(%prefs.servers.temp,$did(5),32)) { did -h $dname 13 | did -v $dname 11 | did -h $dname 12 | return }
+    if ($istok(%prefs.servers.temp,$did(5),32)) { did -h $dname 13 | did -h $dname 11 | did -v $dname 12 | return }
   }
   if ($devent == sclick) {
     if ($did == 2) {
@@ -505,13 +513,17 @@ on *:dialog:Pmserver:*:*:{
       else %prefs.mserver.away = $false
       if ($did(10).state) %prefs.mserver.quit = $true
       else %prefs.mserver.quit = $false
-      %prefs.servers = $did(5)
+      %prefs.servers = %prefs.servers.temp 
       did -b Pmserver 1
       return
     }
     if ($istok(4 8 9 10,$did,32)) { did -e pmserver 1 | return }
     if ($did == 6) { scid $activecid did -o pmserver 5 1 $addtok($did(5),$server,32) | did -e Pmserver 1 | return }
+    if ($did == 11) { %prefs.servers.temp = $sorttok($addtok(%prefs.servers.temp,$did(5),32),32) | did -r $dname 5 | didtok $dname 5 32 %prefs.servers.temp | did -e Pmserver 1 | return }
+    if ($did == 12) { %prefs.servers.temp = $remtok(%prefs.servers.temp,$did(5),1,32) | did -r $dname 5 | didtok $dname 5 32 %prefs.servers.temp | did -e Pmserver 1 | return }
+    if ($did == 5) { did -h $dname 13 | did -h $dname 11 | did -v $dname 12 | return }
   }
+  if ($devent == close ) { unset %prefs.servers.temp }
 }
 
 dialog prefs_sounds {
